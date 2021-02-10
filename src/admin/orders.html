@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Замовлення</title>
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+<h1>Замовлення</h1>
+<a href="orders.html">Замовлення</a><strong> | </strong>
+<a href="products.html">Продукти</a><strong> | </strong>
+<a href="categories.html">Категорії</a><strong> | </strong>
+<a href="posts.html">Пости</a><strong> | </strong>
+<a href="pages.html">Сторінки</a><strong> | </strong>
+<a href="users.html">Користувачі</a>
+<br>
+<br>
+<div id="orders"></div>
+<script>
+    let state = {};
+    const orders = document.getElementById('orders');
+    const domain = 'http://192.168.1.100:8080/api/v1/';
+    const init = () => {
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', domain + 'order/index');
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        xhr.send();
+        xhr.onload = () => {
+            state = JSON.parse(xhr.response);
+            let distinctProducts = '';
+            state.distinctProducts.map(product => {
+                distinctProducts += `<tr><td style="width: 50px">${product.quantity} ${product.unit}</td><td>${product.title}</td></tr>`;
+            })
+            let items = `
+                <h2>Всього товарів замовлено за вчора:</h2>
+                <table>${distinctProducts}</table><br><br>
+            `;
+            state.orders.map(order => {
+                let products = '';
+                order.products.map(product => {
+                    products += `<tr><td style="width: 50px">${product.quantity} ${product.unit}</td><td>${product.title}</td></tr>`;
+                })
+                items += `
+                    <p><b>${order.created_at}</b> ${order.name} ${order.phone} ${order.address}</p>
+                    <p>${order.message}</p>
+                    <table>${products}</table><br><br>
+                `;
+            })
+            orders.innerHTML = items;
+        }
+    }
+    init();
+</script>
+</body>
+</html>

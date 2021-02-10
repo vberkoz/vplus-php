@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Категорії</title>
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+<h1>Категорії</h1>
+<a href="orders.html">Замовлення</a><strong> | </strong>
+<a href="products.html">Продукти</a><strong> | </strong>
+<a href="categories.html">Категорії</a><strong> | </strong>
+<a href="posts.html">Пости</a><strong> | </strong>
+<a href="pages.html">Сторінки</a><strong> | </strong>
+<a href="users.html">Користувачі</a>
+<br>
+<br>
+<table id="categories"></table>
+<div style="position: sticky; bottom: 0; background-color: #fff; padding: 5px 30px;">
+    <button id="create" onclick="store()">Створити</button>
+    <button id="update" disabled onclick="update()">Зберегти</button>
+    <button id="destroy" disabled onclick="destroy(this)">Видалити</button>
+</div>
+<script>
+    const table = document.getElementById('categories');
+    const tableHeader = '<th></th><th>Назва</th><th>Слаг</th><th>Тег title</th><th>Тег meta description</th><th>Показувати</th>';
+    const updateBtn = document.getElementById('update');
+    const destroyBtn = document.getElementById('destroy');
+    const domain = 'http://192.168.1.100:8080/api/v1/';
+    let initialState = [];
+    let currentState = [];
+    let itemsToDestroy = [];
+
+    const init = () => {
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', domain + 'categories/list')
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        xhr.send();
+        xhr.onload = () => {
+            initialState = JSON.parse(xhr.response);
+            currentState = JSON.parse(JSON.stringify(initialState));
+            console.log(initialState);
+            let tr = document.createElement('tr');
+            tr.innerHTML = tableHeader;
+            table.appendChild(tr);
+            initialState.map(i => {
+                let tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <tr>
+                        <td><input type="checkbox" data-id="${i.id}" onclick="checkForDestroy(this)"></td>
+                        <td>
+                            <input type="text" value="${i.title_ua}" data-id="${i.id}" name="title_ua" onkeyup="changeValue(this)" style="width: 100px;">
+                            <input type="text" value="${i.title_en}" data-id="${i.id}" name="title_en" onkeyup="changeValue(this)" style="width: 100px;">
+                        </td>
+                        <td>
+                            <input type="text" value="${i.slug_ua}" data-id="${i.id}" name="slug_ua" onkeyup="changeValue(this)" style="width: 100px;">
+                            <input type="text" value="${i.slug_en}" data-id="${i.id}" name="slug_en" onkeyup="changeValue(this)" style="width: 100px;">
+                        </td>
+                        <td>
+                            <input type="text" value="${i.tag_title_ua}" data-id="${i.id}" name="tag_title_ua" onkeyup="changeValue(this)" style="width: 100px;">
+                            <input type="text" value="${i.tag_title_en}" data-id="${i.id}" name="tag_title_en" onkeyup="changeValue(this)" style="width: 100px;">
+                        </td>
+                        <td>
+                            <input type="text" value="${i.tag_meta_desc_ua}" data-id="${i.id}" name="tag_meta_desc_ua" onkeyup="changeValue(this)" style="width: 100px;">
+                            <input type="text" value="${i.tag_meta_desc_en}" data-id="${i.id}" name="tag_meta_desc_en" onkeyup="changeValue(this)" style="width: 100px;">
+                        </td>
+                        <td><input type="checkbox" ${i.visible === "1" ? "checked" : ""} data-id="${i.id}" name="visible" onclick="changeValue(this)"></td>
+                    </tr>
+                `;
+                table.appendChild(tr);
+            });
+        }
+    }
+
+    init();
+
+    const changeValue = e => {
+        currentState.map(i => {
+            if (i.id === e.getAttribute('data-id')) {
+                switch (e.getAttribute('name')) {
+                    case 'title_ua': i.title_ua = e.value; break;
+                    case 'slug_ua': i.slug_ua = e.value; break;
+                    case 'tag_title_ua': i.tag_title_ua = e.value; break;
+                    case 'tag_meta_desc_ua': i.tag_meta_desc_ua = e.value; break;
+
+                    case 'title_en': i.title_en = e.value; break;
+                    case 'slug_en': i.slug_en = e.value; break;
+                    case 'tag_title_en': i.tag_title_en = e.value; break;
+                    case 'tag_meta_desc_en': i.tag_meta_desc_en = e.value; break;
+
+                    case 'visible': i.visible = e.checked ? '1' : '0'; break;
+                }
+            }
+        });
+        console.log(currentState);
+        updateBtn.disabled = arrayEquals();
+    }
+
+    const arrayEquals = () => {
+        let equal = true;
+        if (initialState.length === currentState.length) {
+            initialState.forEach((v, i) => {
+                equal ? equal = v.title_ua === currentState[i].title_ua : null;
+                equal ? equal = v.slug_ua === currentState[i].slug_ua : null;
+                equal ? equal = v.tag_title_ua === currentState[i].tag_title_ua : null;
+                equal ? equal = v.tag_meta_desc_ua === currentState[i].tag_meta_desc_ua : null;
+
+                equal ? equal = v.title_en === currentState[i].title_en : null;
+                equal ? equal = v.slug_en === currentState[i].slug_en : null;
+                equal ? equal = v.tag_title_en === currentState[i].tag_title_en : null;
+                equal ? equal = v.tag_meta_desc_en === currentState[i].tag_meta_desc_en : null;
+
+                equal ? equal = v.visible === currentState[i].visible : null;
+            });
+            return equal;
+        }
+        return false;
+    }
+
+    const update = () => {
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", domain + 'categories/update');
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        xhr.send(JSON.stringify(currentState));
+        initialState = JSON.parse(JSON.stringify(currentState));
+        updateBtn.disabled = arrayEquals();
+    }
+
+    const store = () => {
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', domain + 'category/store');
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        xhr.send();
+        xhr.onload = () => {
+            let i = JSON.parse(xhr.response);
+            initialState.push(i);
+            currentState.push(i);
+            initialState = JSON.parse(JSON.stringify(initialState));
+            currentState = JSON.parse(JSON.stringify(initialState));
+            let tr = document.createElement('tr');
+            tr.innerHTML = `
+                <tr>
+                    <td><input type="checkbox" data-id="${i.id}" onclick="checkForDestroy(this)"></td>
+                    <td>
+                        <input type="text" value="${i.title_ua}" data-id="${i.id}" name="title_ua" onkeyup="changeValue(this)" style="width: 100px;">
+                        <input type="text" value="${i.title_en}" data-id="${i.id}" name="title_en" onkeyup="changeValue(this)" style="width: 100px;">
+                    </td>
+                    <td>
+                        <input type="text" value="${i.slug_ua}" data-id="${i.id}" name="slug_ua" onkeyup="changeValue(this)" style="width: 100px;">
+                        <input type="text" value="${i.slug_en}" data-id="${i.id}" name="slug_en" onkeyup="changeValue(this)" style="width: 100px;">
+                    </td>
+                    <td>
+                        <input type="text" value="${i.tag_title_ua}" data-id="${i.id}" name="tag_title_ua" onkeyup="changeValue(this)" style="width: 100px;">
+                        <input type="text" value="${i.tag_title_en}" data-id="${i.id}" name="tag_title_en" onkeyup="changeValue(this)" style="width: 100px;">
+                    </td>
+                    <td>
+                        <input type="text" value="${i.tag_meta_desc_ua}" data-id="${i.id}" name="tag_meta_desc_ua" onkeyup="changeValue(this)" style="width: 100px;">
+                        <input type="text" value="${i.tag_meta_desc_en}" data-id="${i.id}" name="tag_meta_desc_en" onkeyup="changeValue(this)" style="width: 100px;">
+                    </td>
+                    <td><input type="checkbox" ${i.visible === "1" ? "checked" : ""} data-id="${i.id}" name="visible" onclick="changeValue(this)"></td>
+                </tr>
+            `;
+            table.appendChild(tr);
+        }
+    }
+
+    const checkForDestroy = e => {
+        if (e.checked) {
+            itemsToDestroy.push(e.getAttribute('data-id'))
+        } else {
+            itemsToDestroy = itemsToDestroy.filter(i => i !== e.getAttribute('data-id'));
+        }
+        destroyBtn.disabled = !itemsToDestroy.length;
+    }
+
+    const destroy = (el) => {
+        if (confirm('УВАГА! Цю дію неможливо відмінити. Бажаєте видалити вибрані категорії?')) {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", domain + 'categories/destroy');
+            xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+            xhr.send(JSON.stringify(itemsToDestroy));
+            xhr.onload = () => {
+                itemsToDestroy.map(i => {
+                    table.querySelector(`[data-id="${i}"]`).parentElement.parentElement.remove()
+                });
+                itemsToDestroy = [];
+                destroyBtn.disabled = !itemsToDestroy.length;
+            }
+        }
+    }
+
+</script>
+</body>
+</html>

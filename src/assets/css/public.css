@@ -1,0 +1,536 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Inter', sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+nav {min-height: 60px;}
+
+#category {
+    position: absolute;
+    top: 11px;
+    left: 15px;
+}
+#category_btn {
+    width: 110px;
+    padding: 6px;
+}
+#category_btn:focus {
+    box-shadow: none;
+    outline: 0 none;
+    border: 1px solid #ced4da;
+}
+#category_dd {
+    top: -10px;
+    left: -2px;
+    width: 214px;
+    z-index: 1002;
+}
+
+#search {
+    position: absolute;
+    top: 11px;
+    left: 126px;
+}
+#search_input {
+    z-index: 1001;
+    position: absolute;
+    padding: 6px 15px;
+}
+#search_input:focus {
+    box-shadow: none;
+    outline: 0 none;
+    border: 1px solid #ced4da;
+}
+#search_dd {
+    top: -10px;
+    left: -121px;
+    width: 214px;
+    padding: 50px 0 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+#menu {
+    position: absolute;
+    top: 11px;
+    right: 15px;
+}
+#menu_btn {
+    border: 1px solid #ced4da;
+    padding: 5px 12px;
+}
+#menu_btn:hover {background-color: rgba(0, 0, 0, 0)}
+#menu_btn:after {display: none;}
+#menu_btn:focus {
+    box-shadow: none;
+    outline: 0 none;
+    border: 1px solid #ced4da;
+}
+#menu_dd {
+    top: -10px;
+    left: -162px;
+    width: 214px;
+    z-index: 1002;
+}
+
+#account_menu {width: 100%;}
+#account_menu button {
+    margin: 0 0 8px 0;
+    width: 100%;
+}
+
+.carousel-inner {border-radius: .7rem;}
+
+#order_list {width: 100%;}
+
+.product-item, .cart-item {width: 100%;}
+.product-image {
+    max-width: 60px;
+    vertical-align: text-bottom;
+}
+.product-title {white-space: nowrap;}
+.product-info {
+    width: 129px;
+}
+.product-control {width: 145px;}
+.product-delete {vertical-align: 0px;}
+
+#cart {padding: 16px;}
+
+/*
+    JioPhone 2
+*/
+@media (min-width: 240px) {
+    .card {padding: 0;}
+    .product-card {width: 100%;}
+}
+
+/*
+    Galaxy Fold
+*/
+@media (min-width: 280px) {
+    #category_dd {width: 254px;}
+
+    #search {top: 11px;}
+    #search_input {width: 71px;}
+    #search_dd {width: 254px;}
+
+    #menu_dd {
+        left: -202px;
+        width: 254px;
+    }
+    .card {padding: 0;}
+    .product-card {width: 100%;}
+
+    #account {
+        padding: 0 12px;
+        width: 100%;
+    }
+    .product-info {width: 147px;}
+    .product-control {
+        width: 153px;
+        margin-right: 10px;
+    }
+}
+
+/*
+    Nokia Lumina 520
+    iPhone 4
+    iPhone 5/SE
+*/
+@media (min-width: 320px) {
+    #category_dd {width: 294px;}
+
+    #search_input {width: 111px;}
+    #search_dd {width: 294px;}
+
+    #menu_dd {
+        left: -242px;
+        width: 294px;
+    }
+
+    .card {padding: 0;}
+    .product-card {width: 100%;}
+
+    .product-control {width: 186px;}
+    .product-info {width: 187px;}
+}
+
+/*
+    BlackBerry Z30
+    Galaxy Note 3
+    Galaxy Note II
+    Galaxy S III
+    Microsoft Lumina 950
+    Moto G4
+    Nexus 5
+    Galaxy S5
+*/
+@media (min-width: 360px) {
+    #category_dd {width: 334px;}
+
+    #search_input {width: 150px;}
+    #search_dd {width: 334px;}
+
+    #menu_dd {
+        left: -282px;
+        width: 334px;
+    }
+
+    .card {padding: 0;}
+    .product-card {width: 100%;}
+
+    .product-info {width: 227px;}
+    .product-control {width: 234px;}
+}
+
+/*
+    iPhone 6/7/8
+    iPhone X
+*/
+@media (min-width: 375px) {
+    #category_dd {width: 200px;}
+
+    #search_input {width: 165px;}
+    #search_dd {width: 349px;}
+
+    #menu_dd {
+        left: -148px;
+        width: 200px;
+    }
+
+    .card {padding: 0;}
+    .product-card {width: 50%;}
+
+    .product-info {width: 242px;}
+    .product-control {margin-right: 25px;}
+}
+
+/*
+    LG Optimus L70
+    Nexus 4
+*/
+@media (min-width: 384px) {
+    #category_dd {width: 200px;}
+
+    #search_input {width: 174px;}
+    #search_dd {width: 358px;}
+
+    #menu_dd {
+        left: -148px;
+        width: 200px;
+    }
+
+    .card {padding: 0;}
+    .product-card {width: 50%;}
+
+    .product-info {width: 251px;}
+    .product-control {margin-right: 34px;}
+}
+
+/*
+    Nexus 5X
+    Nexus 6
+    Nexus 6P
+    Nexus 7
+    Pixel 2
+    Pixel 2 XL
+    iPhone 6/7/8 Plus
+*/
+@media (min-width: 411px) {
+    #category_dd {width: 200px;}
+
+    #search_input {width: 204px;}
+    #search_dd {width: 388px;}
+
+    #menu_dd {
+        left: -148px;
+        width: 200px;
+    }
+
+    .card {padding: 10px;}
+    .product-card {width: 50%;}
+
+    .product-info {width: 258px;}
+    .product-control {margin-right: 41px;}
+}
+
+@media (min-width: 425px) {
+    #category_dd {width: 200px;}
+
+    #search_input {width: 215px;}
+    #search_dd {width: 399px;}
+
+    #menu_dd {
+        left: -148px;
+        width: 200px;
+    }
+
+    .card {padding: 10px;}
+    .product-card {width: 50%;}
+
+    .product-info {width: 272px;}
+    .product-control {margin-right: 55px;}
+}
+
+/*
+    Nokia N9
+*/
+@media (min-width: 480px) {
+    #category_dd {width: 200px;}
+
+    #search_input {width: 270px;}
+    #search_dd {width: 454px;}
+
+    #menu_dd {
+        left: -148px;
+        width: 200px;
+    }
+
+    .card {padding: 10px;}
+    .product-card {width: 50%;}
+
+    #account_menu button {
+        margin: 0 0 8px 0;
+        width: auto;
+    }
+
+    .product-info {width: 327px;}
+    .product-control {margin-right: 110px;}
+}
+
+/*
+    Surface Duo
+*/
+@media (min-width: 540px) {
+    #category_dd {width: 200px;}
+
+    #search_input {width: 330px;}
+    #search_dd {width: 514px;}
+
+    #menu_dd {
+        left: -148px;
+        width: 200px;
+    }
+
+    .card {padding: 10px;}
+    .product-card {width: 50%;}
+
+    .product-item {width: 50%;}
+    .cart-item {width: 49.5%;}
+
+    .product-info {width: 147px;}
+    .product-control {
+        width: 153px;
+        margin-right: 10px;
+    }
+}
+
+/* BlackBerry PlayBook */
+@media (min-width: 600px) {
+    #category_dd {width: 200px;}
+
+    #search_input {width: 390px;}
+    #search_dd {
+        left: -8px;
+        width: 407px;
+    }
+
+    #menu_dd {
+        left: -148px;
+        width: 200px;
+    }
+
+    .card {padding: 10px;}
+    .product-card {width: 50%;}
+
+    .product-info {width: 162px;}
+    .product-control {width: 155px;}
+}
+
+/* Microsoft Lumina 550 */
+@media (min-width: 640px) {
+    #category_dd {width: 200px;}
+
+    #search_input {width: 430px;}
+    #search_dd {
+        left: -8px;
+        width: 447px;
+    }
+
+    #menu_dd {
+        left: -148px;
+        width: 200px;
+    }
+    .card {padding: 10px;}
+    .product-card {width: 33.33%;}
+
+    .product-info {width: 159px;}
+}
+
+/*
+    iPad Mini
+    iPad
+*/
+@media (min-width: 768px) {
+    #category {left: 240px}
+    #category_dd {width: 200px;}
+
+    #search {left: 350px;}
+    #search_input {
+        left: 3px;
+        width: 340px;
+    }
+    #search_dd {
+        left: -5px;
+        width: 356px;
+    }
+    .product-card {width: 33.33%;}
+
+    .product-item {width: 33.33%;}
+
+    .product-info {width: 147px;}
+    .product-control {width: 230px;}
+}
+
+/*
+    Kindle Fire HDX
+    Nexus 10
+*/
+@media (min-width: 800px) {
+    .product-card {width: 33.33%;}
+    #search_input {
+        left: 0;
+        width: 380px;
+    }
+    #search_dd {
+        left: -9px;
+        width: 397px;
+    }
+}
+
+/*
+    iPad Pro
+*/
+@media (min-width: 1024px) {
+    .product-card {width: 20%;}
+
+    .product-item {width: 25%;}
+    .product-info {width: 147px;}
+}
+
+/*
+    Laptop with MDPI screen
+    Laptop with touch
+*/
+@media (min-width: 1080px) {
+    .product-card {width: 20%;}
+}
+
+/*
+    Laptop with HiDPI screen
+*/
+@media (min-width: 1440px) {
+    .product-card, .product-item {width: 16.66%;}
+    .cart-item {width: 32.9%;}
+    .product-control {width: 180px;}
+}
+
+@media (min-width: 1920px) {
+    .product-card {width: 12.5%;}
+
+    #account_menu {padding: 0 8px;}
+
+    .order {
+        display: inline-block;
+        width: 49%;
+        margin: 0 8px;
+        vertical-align: text-top;
+    }
+    .product-item {width: 33.33%;}
+    .product-info {width: 147px;}
+}
+
+@media (min-width: 2560px) {
+    .product-card {width: 10%;}
+}
+
+.content {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex-shrink: 0;
+}
+
+.btn, .form-control, .navbar-toggler {border-radius: .7rem;}
+.card, .dropdown-menu, .modal-content {border-radius: .7rem;}
+
+.list-group-item:first-child {
+    border-top-left-radius: .7rem;
+    border-top-right-radius: .7rem;
+}
+
+.list-group-item:last-child {
+    margin-bottom: 0;
+    border-bottom-right-radius: .7rem;
+    border-bottom-left-radius: .7rem;
+}
+
+.card-header:first-child {
+    border-radius: calc(.7rem - 1px) calc(.7rem - 1px) 0 0;
+}
+
+.modal-content {padding: 10px;}
+
+.dropdown-menu {
+    padding: 10px 0;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.input-group input {
+    border: 1px solid #007bff;
+    background-color: #007bff;
+    color: #fff;
+}
+
+.input-group input:focus, .input-group input:hover {
+    box-shadow: none;
+    outline: 0 none;
+    border: 1px solid #007bff;
+    background-color: #0069d9;
+    color: #fff;
+}
+
+.gradient-text {
+    white-space: nowrap;
+
+    /* Fallback: Set a background color. */
+    background-color: red;
+
+    /* Create the gradient. */
+    background-image: linear-gradient(to right, #212529 70%, #ffffff 100%);
+
+    /* Set the background size and repeat properties. */
+    background-size: 100%;
+    background-repeat: repeat;
+
+    /* Use the text as a mask for the background. */
+    /* This will show the gradient as a text color rather than element bg. */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+}

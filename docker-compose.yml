@@ -1,0 +1,32 @@
+version: '3.1'
+services:
+  mysql:
+    image: library/mysql:8.0.22
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: gs
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: secret
+    cap_add:
+      - SYS_NICE
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./migration:/docker-entrypoint-initdb.d"
+
+  server:
+    build: server_image
+    ports:
+      - "8080:80"
+    volumes:
+      - "./src:/var/www/html"
+    depends_on:
+      - mysql
+
+  adminer:
+    image: library/adminer:4.7.7
+    restart: always
+    ports:
+      - 8081:8080

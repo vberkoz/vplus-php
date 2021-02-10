@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+body {font: 90%/1.25 Verdana,Arial,Helvetica,sans-serif;}
+td {padding: 0 5px;}
+.cr-boundary {margin: 0 !important;}
+.cr-slider-wrap {
+    margin: 0 !important;
+    text-align: left !important;
+}

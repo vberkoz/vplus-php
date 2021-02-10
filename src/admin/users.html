@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Користувачі</title>
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+<h1>Користувачі</h1>
+<a href="orders.html">Замовлення</a><strong> | </strong>
+<a href="products.html">Продукти</a><strong> | </strong>
+<a href="categories.html">Категорії</a><strong> | </strong>
+<a href="posts.html">Пости</a><strong> | </strong>
+<a href="pages.html">Сторінки</a><strong> | </strong>
+<a href="users.html">Користувачі</a>
+<br>
+<br>
+<div id="index">
+    <div id="users"></div>
+    <div style="position: sticky; bottom: 0; background-color: #fff; padding: 30px 60px;">
+        <button id="create" onclick="create()">Створити</button>
+        <button id="destroy" disabled onclick="destroy()">Видалити</button>
+    </div>
+</div>
+<div id="show" style="display: none;">
+    <div id="user"></div>
+    <div style="position: sticky; bottom: 0; background-color: #fff; padding: 30px 60px;">
+        <button id="back" onclick="back()">Назад</button>
+        <button id="save" disabled onclick="save()">Зберегти</button>
+    </div>
+</div>
+<script>
+    let state = {};
+    const users = document.getElementById('users');
+    const user = document.getElementById('user');
+    const domain = 'http://192.168.1.100:8080/api/v1/';
+    const init = () => {
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', domain + 'user/index');
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        xhr.send();
+        xhr.onload = () => {
+            state = JSON.parse(xhr.response);
+            let items = "<tr><th>Ім'я</th><th>Номер телефону</th><th>Електронна адреса</th><th>Адреса доставки</th></tr>";
+            state.users.map(i => {
+                items += `
+                    <tr>
+                        <td><button data-id="${i.id}" onclick="show(this)">${i.username}</button></td>
+                        <td>${i.phone ? i.phone : 'Відсутній'}</td>
+                        <td>${i.email}</td>
+                        <td>${i.address ? i.address : 'Відсутня'}</td>
+                    </tr>
+                `;
+            })
+            users.innerHTML = `<table>${items}</table><br><br>`;
+        }
+    }
+    init();
+
+    const show = element => {
+        document.getElementById('index').style.display = 'none';
+        document.getElementById('show').style.display = 'block';
+        let details = state.users.filter(i => i.id === element.getAttribute('data-id'))[0];
+        user.innerHTML = `<h2 style="margin-bottom: 0;">${details.username}</h2>${details.email}<br>`;
+        details.phone ? user.innerHTML += `${details.phone}<br>` : null;
+        details.address ? user.innerHTML += `${details.address}<br>` : null;
+        let products = '';
+        state.products.map(i => {
+            products += `
+                <tr><td>${i.title}</td><td>${i.price}</td><td><input type="text"></td></tr>
+            `;
+        });
+        user.innerHTML += `<table>${products}</table>`;
+    }
+
+    const back = () => {
+        // updateBtn.disabled = true;
+        // product.innerHTML = '';
+        document.getElementById('index').style.display = 'block';
+        document.getElementById('show').style.display = 'none';
+    }
+</script>
+</body>
+</html>

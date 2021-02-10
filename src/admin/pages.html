@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Сторінки</title>
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+<h1>Сторінки</h1>
+<a href="orders.html">Замовлення</a><strong> | </strong>
+<a href="products.html">Продукти</a><strong> | </strong>
+<a href="categories.html">Категорії</a><strong> | </strong>
+<a href="posts.html">Пости</a><strong> | </strong>
+<a href="pages.html">Сторінки</a><strong> | </strong>
+<a href="users.html">Користувачі</a>
+<br>
+<br>
+<button onclick="refresh()">Оновити</button>
+<script>
+    const domain = 'http://192.168.1.100:8080/api/v1/';
+    const refresh = () => {
+        console.log('refresh');
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', domain + 'refresh')
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        xhr.send();
+    };
+</script>
+</body>
+</html>

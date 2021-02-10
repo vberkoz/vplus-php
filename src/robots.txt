@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+Allow: /en/
+Allow: /ua/
+
+Disallow: /en/cabinet.html
+Disallow: /en/cart.html
+Disallow: /en/checkout.html
+
+Disallow: /ua/cabinet.html
+Disallow: /ua/cart.html
+Disallow: /ua/checkout.html
+
+Disallow: /admin/
+Disallow: /components/
+Disallow: /config/
+Disallow: /modules/
+Disallow: /ssr/
+
+Sitemap: https://vplus.in.ua/sitemap.xml
