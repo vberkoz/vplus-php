@@ -18,11 +18,19 @@
 <a href="users.html">Користувачі</a>
 <br>
 <br>
-<div id="orders"></div>
+<button onclick="switchTab('today')">Сьогодні</button>
+<button onclick="switchTab('yesterday')">Вчора</button>
+<button onclick="switchTab('total')">Всього</button>
+<div id="today" style="display: none;"></div>
+<div id="yesterday"></div>
+<div id="total" style="display: none;"></div>
 <script>
     let state = {};
-    const orders = document.getElementById('orders');
+    const today = document.getElementById('today');
+    const yesterday = document.getElementById('yesterday');
+    const total = document.getElementById('total');
     const domain = 'http://192.168.1.100:8080/api/v1/';
+    // const domain = 'http://vplus.in.ua/api/v1/';
     const init = () => {
         let xhr = new XMLHttpRequest();
         xhr.open('GET', domain + 'order/index');
@@ -30,29 +38,46 @@
         xhr.send();
         xhr.onload = () => {
             state = JSON.parse(xhr.response);
-            let distinctProducts = '';
-            state.distinctProducts.map(product => {
-                distinctProducts += `<tr><td style="width: 50px">${product.quantity} ${product.unit}</td><td>${product.title}</td></tr>`;
-            })
-            let items = `
-                <h2>Всього товарів замовлено за вчора:</h2>
+
+            today.innerHTML = '<h2>Сьогодні</h2>' + renderTab(state.today);
+            yesterday.innerHTML = '<h2>Вчора</h2>' + renderTab(state.yesterday);
+            total.innerHTML = '<h2>Всього</h2>' + renderTab(state.total);
+        }
+    }
+    init();
+
+    const renderTab = tabData => {
+        let distinctProducts = '';
+        tabData.distinctProducts.map(product => {
+            distinctProducts += `<tr><td style="width: 50px">${product.quantity} ${product.unit}</td><td>${product.title}</td></tr>`;
+        })
+        let items = `
                 <table>${distinctProducts}</table><br><br>
             `;
-            state.orders.map(order => {
-                let products = '';
-                order.products.map(product => {
-                    products += `<tr><td style="width: 50px">${product.quantity} ${product.unit}</td><td>${product.title}</td></tr>`;
-                })
-                items += `
+        tabData.orders.map(order => {
+            let products = '';
+            order.products.map(product => {
+                products += `<tr><td style="width: 50px">${product.quantity} ${product.unit}</td><td>${product.title}</td></tr>`;
+            })
+            items += `
                     <p><b>${order.created_at}</b> ${order.name} ${order.phone} ${order.address}</p>
                     <p>${order.message}</p>
                     <table>${products}</table><br><br>
                 `;
-            })
-            orders.innerHTML = items;
+        })
+        return items;
+    }
+
+    const switchTab = tab => {
+        document.getElementById('today').style.display = 'none';
+        document.getElementById('yesterday').style.display = 'none';
+        document.getElementById('total').style.display = 'none';
+        switch (tab) {
+            case 'today': document.getElementById('today').style.display = 'block'; break;
+            case 'yesterday': document.getElementById('yesterday').style.display = 'block'; break;
+            case 'total': document.getElementById('total').style.display = 'block'; break;
         }
     }
-    init();
 </script>
 </body>
 </html>

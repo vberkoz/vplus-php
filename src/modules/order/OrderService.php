@@ -6,8 +6,17 @@ class OrderService
 {
     public static function index()
     {
+        return [
+            'today' => self::orders('today'),
+            'yesterday' => self::orders('yesterday'),
+            'total' => self::orders('total')
+        ];
+    }
+
+    private static function orders($period)
+    {
         $products = [];
-        $orders = OrderRepository::index();
+        $orders = OrderRepository::index($period);
         foreach ($orders as $key => $order) {
             $orders[$key]['products'] = OrderRepository::products($order['id']);
             foreach ($orders[$key]['products'] as $product) {
