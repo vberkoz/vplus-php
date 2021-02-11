@@ -151,12 +151,18 @@ class Product
                 001_product_ua_details.desc AS desc_ua,
                 001_product_ua_details.char AS char_ua,
                 001_product_ua_details.unit AS unit_ua,
+                001_product_ua_details.tag_title AS tag_title_ua,
+                001_product_ua_details.tag_meta_desc AS tag_meta_desc_ua,
+                
                 001_product_en_details.title AS title_en,
                 001_product_en_details.slug AS slug_en,
                 001_product_en_details.img AS img_en,
                 001_product_en_details.desc AS desc_en,
                 001_product_en_details.char AS char_en,
                 001_product_en_details.unit AS unit_en,
+                001_product_en_details.tag_title AS tag_title_en,
+                001_product_en_details.tag_meta_desc AS tag_meta_desc_en,
+                   
                 001_products.id,
                 001_products.cat_id,
                 001_products.code,
@@ -164,6 +170,7 @@ class Product
                 001_products.visible,
                 001_products.vol,
                 001_products.vol_min,
+                
                 001_category_ua_details.title AS category,
                 001_category_ua_details.slug AS category_slug
             FROM 001_products
@@ -194,6 +201,8 @@ class Product
         $desc_ua = $product['desc_ua'];
         $char_ua = $product['char_ua'];
         $unit_ua = $product['unit_ua'];
+        $tag_title_ua = $product['tag_title_ua'];
+        $tag_meta_desc_ua = $product['tag_meta_desc_ua'];
 
         $title_en = $product['title_en'];
         $slug_en = $product['slug_en'];
@@ -201,6 +210,8 @@ class Product
         $desc_en = $product['desc_en'];
         $char_en = $product['char_en'];
         $unit_en = $product['unit_en'];
+        $tag_title_en = $product['tag_title_en'];
+        $tag_meta_desc_en = $product['tag_meta_desc_en'];
 
         $sql = "UPDATE `001_products`
                 SET
@@ -218,7 +229,9 @@ class Product
                     `img` = '$img_ua',
                     `desc` = '$desc_ua',
                     `char` = '$char_ua',
-                    `unit` = '$unit_ua'
+                    `unit` = '$unit_ua',
+                    `tag_title` = '$tag_title_ua',
+                    `tag_meta_desc` = '$tag_meta_desc_ua'
                 WHERE `prod_id` = '$id';
                 UPDATE `001_product_en_details`
                 SET
@@ -227,7 +240,9 @@ class Product
                     `img` = '$img_en',
                     `desc` = '$desc_en',
                     `char` = '$char_en',
-                    `unit` = '$unit_en'
+                    `unit` = '$unit_en',
+                    `tag_title` = '$tag_title_en',
+                    `tag_meta_desc` = '$tag_meta_desc_en'
                 WHERE `prod_id` = '$id';";
         $r = $db->prepare($sql);
         $r->execute();

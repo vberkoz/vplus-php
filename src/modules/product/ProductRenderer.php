@@ -25,6 +25,8 @@ class ProductRenderer
                     001_product_'.$lang.'_details.desc,
                     001_product_'.$lang.'_details.char,
                     001_product_'.$lang.'_details.unit,
+                    001_product_'.$lang.'_details.tag_title,
+                    001_product_'.$lang.'_details.tag_meta_desc,
                     001_category_'.$lang.'_details.title AS cat,
                     001_category_'.$lang.'_details.slug AS cat_slug
                 ',
@@ -43,7 +45,8 @@ class ProductRenderer
             ]);
 
             $prod = $prods[0];
-            $pageTitle = $prod['title'];
+            $pageTitle = $prod['tag_title'];
+            $tagMetaDesc = $prod['tag_meta_desc'];
             $assets = '../../assets';
             $dir = "/$lang";
 

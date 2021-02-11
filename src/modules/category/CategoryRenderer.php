@@ -41,12 +41,13 @@ class CategoryRenderer
             ]);
 
             $cats = Utils::storage([
-                'columns' => 'id, title, slug',
+                'columns' => 'id, title, slug, tag_title, tag_meta_desc',
                 'table' => '001_category_'.$lang.'_details',
                 'conditions' => "id = $cat_id"
             ]);
 
-            $pageTitle = $cats[0]['title'];
+            $pageTitle = $cats[0]['tag_title'];
+            $tagMetaDesc = $cats[0]['tag_meta_desc'];
             $assets = '../../assets';
             $dir = "/$lang";
             $page = 'category/'.Utils::storage([

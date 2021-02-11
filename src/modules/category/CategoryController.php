@@ -22,7 +22,7 @@ class CategoryController
     {
         $content = trim(file_get_contents("php://input"));
         $decoded = json_decode($content, true);
-        Category::updateAll($decoded);
+        CategoryService::update($decoded);
         return true;
     }
 

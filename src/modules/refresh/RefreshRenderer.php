@@ -64,6 +64,7 @@ class RefreshRenderer
             case 'ua': $pageTitle = 'Кабінет | Вітамін+'; break;
             case 'en': $pageTitle = 'Cabinet | Vitamin+'; break;
         }
+        $tagMetaDesc = '';
 
         $assets = '../assets';
         $dir = "/$lang";
@@ -87,6 +88,7 @@ class RefreshRenderer
             case 'ua': $pageTitle = 'Головна | Вітамін+'; break;
             case 'en': $pageTitle = 'Main | Vitamin+'; break;
         }
+        $tagMetaDesc = '';
 
         $assets = '../assets';
         $dir = "/$lang";
@@ -165,6 +167,7 @@ class RefreshRenderer
             case 'ua': $pageTitle = 'Оплата і Доставка | Вітамін+'; break;
             case 'en': $pageTitle = 'Payment and Delivery | Vitamin+'; break;
         }
+        $tagMetaDesc = '';
 
         $assets = '../assets';
         $dir = "/$lang";
@@ -188,6 +191,7 @@ class RefreshRenderer
             case 'ua': $pageTitle = 'Блог | Вітамін+'; break;
             case 'en': $pageTitle = 'Blog | Vitamin+'; break;
         }
+        $tagMetaDesc = '';
 
         $assets = '../assets';
         $dir = "/$lang";
@@ -211,6 +215,7 @@ class RefreshRenderer
             case 'ua': $pageTitle = 'Контакти | Вітамін+'; break;
             case 'en': $pageTitle = 'Contacts | Vitamin+'; break;
         }
+        $tagMetaDesc = '';
 
         $assets = '../assets';
         $dir = "/$lang";
@@ -235,6 +240,7 @@ class RefreshRenderer
             case 'ua': $pageTitle = 'Про нас | Вітамін+'; break;
             case 'en': $pageTitle = 'About Us | Vitamin+'; break;
         }
+        $tagMetaDesc = '';
 
         $assets = '../assets';
         $dir = "/$lang";
@@ -258,6 +264,7 @@ class RefreshRenderer
             case 'ua': $pageTitle = 'Кошик | Вітамін+'; break;
             case 'en': $pageTitle = 'Cart | Vitamin+'; break;
         }
+        $tagMetaDesc = '';
 
         $assets = '../assets';
         $dir = "/$lang";
@@ -281,6 +288,7 @@ class RefreshRenderer
             case 'ua': $pageTitle = 'Перевірка | Вітамін+'; break;
             case 'en': $pageTitle = 'Checkout | Vitamin+'; break;
         }
+        $tagMetaDesc = '';
 
         $assets = '../assets';
         $dir = "/$lang";

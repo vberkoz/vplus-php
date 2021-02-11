@@ -1,5 +1,7 @@
 <?php
 
+include_once 'Category.php';
+include_once ROOT.'/modules/refresh/RefreshRenderer.php';
 
 class CategoryService
 {
@@ -38,5 +40,18 @@ class CategoryService
                 ],
             ]
         ]);
+    }
+
+    public static function update($data)
+    {
+        Category::updateAll($data);
+        $pages = [
+            'name' => ['index', 'payment', 'blog', 'contact', 'about'],
+            'ua' => ['Головна', 'Оплата і доставка', 'Блог', 'Контакти', 'Про нас'],
+            'en' => ['Main', 'Payment and Delivery', 'Blog', 'Contacts', 'About Us']
+        ];
+        foreach ($data as $i) {
+            CategoryRenderer::details($i['id'], $pages);
+        }
     }
 }
