@@ -539,22 +539,26 @@
             let cs = initialState.details.categories;
             let table = document.createElement('table');
             table.innerHTML = `
-                ${inputText('Назва продукту',       p.title_ua,         'title_ua',  '')}
-                ${inputText('Product title',        p.title_en,         'title_en',  '')}
-                ${inputText('Слаг',                 p.slug_ua,          'slug_ua',   '')}
-                ${inputText('Slug',                 p.slug_en,          'slug_en',   '')}
-                ${inputText('Зображення',           p.img_ua,           'img_ua',    'none')}
-                ${inputText('Image',                p.img_en,           'img_en',    'none')}
-                ${textArea('Корисна інформація',    p.desc_ua,          'desc_ua',   '')}
-                ${textArea('Description',           p.desc_en,          'desc_en',   '')}
-                ${textArea('Характеристики',        p.char_ua,          'char_ua',   '')}
-                ${textArea('Characteristics',       p.char_en,          'char_en',   '')}
-                ${inputSelect('Назва категорії',    p.cat_id,   cs,     'cat_id',    '')}
-                ${inputText('Код',                  p.code,             'code',      'none')}
-                ${inputText('Ціна',                 p.price,            'price',     '')}
-                ${inputCheckbox('Показувати',       p.visible,          'visible',   '')}
-                ${inputText("Об'єм",                p.vol,              'vol',       '')}
-                ${inputText("Мін. об'єм",           p.vol_min,          'vol_min',   '')}
+                ${inputText('Назва продукту (UA)',       p.title_ua,         'title_ua',         '')}
+                ${inputText('Product title (EN)',        p.title_en,         'title_en',         '')}
+                ${inputText('Слаг (UA)',                 p.slug_ua,          'slug_ua',          '')}
+                ${inputText('Slug (EN)',                 p.slug_en,          'slug_en',          '')}
+                ${inputText('Тег title (UA)',            p.tag_title_ua,     'tag_title_ua',     '')}
+                ${inputText('Tag title (EN)',            p.tag_title_en,     'tag_title_en',     '')}
+                ${inputText('Тег meta description (UA)', p.tag_meta_desc_ua, 'tag_meta_desc_ua', '')}
+                ${inputText('Tag meta description (EN)', p.tag_meta_desc_en, 'tag_meta_desc_en', '')}
+                ${inputText('Зображення (UA)',           p.img_ua,           'img_ua',           'none')}
+                ${inputText('Image (EN)',                p.img_en,           'img_en',           'none')}
+                ${textArea('Корисна інформація (UA)',    p.desc_ua,          'desc_ua',          '')}
+                ${textArea('Description (EN)',           p.desc_en,          'desc_en',          '')}
+                ${textArea('Характеристики (UA)',        p.char_ua,          'char_ua',          '')}
+                ${textArea('Characteristics (EN)',       p.char_en,          'char_en',          '')}
+                ${inputSelect('Назва категорії',         p.cat_id,   cs,     'cat_id',           '')}
+                ${inputText('Код',                       p.code,             'code',             'none')}
+                ${inputText('Ціна',                      p.price,            'price',            '')}
+                ${inputCheckbox('Показувати',            p.visible,          'visible',          '')}
+                ${inputText("Об'єм",                     p.vol,              'vol',              '')}
+                ${inputText("Мін. об'єм",                p.vol_min,          'vol_min',          '')}
                 ${inputSelectUnit(p.unit_en)}
             `;
             product.appendChild(table);
